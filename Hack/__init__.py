@@ -2,7 +2,7 @@ import env
 import sys
 from logger import LOGGER
 import asyncio
-
+from pyrogram import Client
 from telethon import TelegramClient
 
 loop = asyncio.get_event_loop()
