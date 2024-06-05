@@ -14,9 +14,9 @@ bot = TelegramClient('Hack', env.API_ID,
 
 app = Client(
     "TheChampu",
-    api_id = API_ID,
-    api_hash = API_HASH,
-    bot_token = TOKEN )
+    api_id = env.API_ID,
+    api_hash = env.API_HASH,
+    bot_token = env.BOT_TOKEN )
 
 
 async def initiate_bot():
