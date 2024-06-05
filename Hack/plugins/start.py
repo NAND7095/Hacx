@@ -1,36 +1,54 @@
 import env
-from Hack import bot, app
-from Hack.helpers import MENU1, KEYBOARD1, PM_TEXT, PM_BUTTON
+from Hack import bot
+from Hack.helpers import MENU1, KEYBOARD1
 from Hack.database import DB
-from pyrogram import filters
-from pyrogram.types import CallbackQuery
+from telethon import events
+from telethon.tl.custom.button import Button
 
+@bot.on(events.NewMessage(pattern="/start"))
+async def start(event):
+    id = event.sender_id
+    photo = env.START_IMG_URL
+    mention = f"[{event.sender.first_name}](tg://user?id={id})"
+    TEXT = "Hey {}, I am a Session Hack Bot Supporting Both Pyrogram and Telethon Session String. Type /hack to see the menu"
+    updates_url = "https://t.me/TheChampu"
+    support_url = "https://t.me/FenuZone"
+    owner_url = "https://t.me/itsMeShivanshu"
+    chat_url = "https://t.me/TheChampuClub"
+    help_button = Button.inline("ʜᴀᴄᴋ 📲", data="help_callback")
 
-@app.on_message(filters.command("start") & filters.private)
-async def _start(_, message):
-    user_id = message.from_user.id
-    user = message.from_user.mention
-    bot = (await _.get_me()).mention
+    buttons = [
+        [
+            Button.url("ᴜᴘᴅᴀᴛᴇꜱ ⚡️", url=updates_url),
+            Button.url("💬 ꜱᴜᴘᴘᴏʀᴛ", url=support_url)
+        ],
+        [
+            Button.url("ᴄʜᴀᴛ ɢʀᴏᴜᴘ 💌", url=chat_url),
+            Button.url("💕 ᴏᴡɴᴇʀ", url=owner_url)
+        ],
+        [help_button],
+    ]
+
+    # Send the message with buttons
+    await event.reply(TEXT.format(mention), buttons=buttons)
+
     if DB:
         await DB.add_user(id)
     if env.LOG_GROUP_ID:
-        await bot.send_message(env.LOG_GROUP_ID,
-                               f'{mention} Has Just Started The Bot')
-    await message.reply_photo(
-       photo = env.START_IMG_URL,
-       caption = PM_TEXT.format(user, bot),
-       reply_markup = PM_BUTTON) 
+        await bot.send_message(env.LOG_GROUP_ID, f'{mention} Has Just Started The Bot')
 
-
-@app.on_message(filters.command("hack") & filters.private)
-async def _hack(_, message):
-    await message.reply_text(MENU1,
-              reply_markup = KEYBOARD1) 
-
-
-@app.on_callback_query(filters.regex("hack_btn"))
-async def heck_callback(bot : app, query : CallbackQuery):
-    await query.message.delete()
-    await query.message.reply_text(MENU1,
-              reply_markup = KEYBOARD1)
-
+@bot.on(events.CallbackQuery(data="help_callback"))
+async def help_callback_handler(event):
+    # Trigger the /help command
+    await hack(event)
+    
+@bot.on(events.CallbackQuery(data="back_callback"))
+async def back_callback_handler(event):
+    # Trigger the /help command
+    await start(event)
+    
+@bot.on(events.NewMessage(pattern="/hack"))
+async def hack(event):
+    if not event.is_private:
+        return await event.reply("You can't use me in groups.")
+    await event.reply(MENU1, buttons=KEYBOARD1)
