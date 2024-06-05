@@ -1,26 +1,31 @@
 import env
 from Hack import bot
-from Hack.helpers import MENU1, KEYBOARD1
+from Hack.helpers import MENU1, KEYBOARD1, PM_TEXT, PM_BUTTON
 from Hack.database import DB
-
-from telethon import events
-
-
-@bot.on(events.NewMessage(pattern="/start"))
-async def start(event):
-    id = event.sender_id
-    mention = f"[{event.sender.first_name}](tg://user?id={id})"
-    TEXT = "Hey {}, I am a Session Hack Bot Supporting Both Pyrogram and Telethon Session String. Type /hack to see menu"
-    await event.reply(TEXT.format(mention))
-    if DB:
-        await DB.add_user(id)
-    if env.LOG_GROUP_ID:
-        await bot.send_message(env.LOG_GROUP_ID,
-                               f'{mention} Has Just Started The Bot')
+from pyrogram import filters
+from pyrogram.types import CallbackQuery
 
 
-@bot.on(events.NewMessage(pattern="/hack"))
-async def hack(event):
-    if not event.is_private:
-        return await event.reply("You can't use me in groups.")
-    await event.reply(MENU1, buttons=KEYBOARD1)
+@bot.on_message(filters.command("start") & filters.private)
+async def _start(_, message):
+    user_id = message.from_user.id
+    user = message.from_user.mention
+    bot = (await _.get_me()).mention
+    await db(user_id)
+    await message.reply_photo(
+       photo = env.START_IMG_URL,
+       caption = PM_TEXT.format(user, bot),
+       reply_markup = PM_BUTTON) 
+
+
+@bot.on_message(filters.command("hack") & filters.private)
+async def _hack(_, message):
+    await message.reply_text(MENU1,
+              reply_markup = KEYBOARD1) 
+
+
+@bot.on_callback_query(filters.regex("hack_btn"))
+async def heck_callback(bot : app, query : CallbackQuery):
+    await query.message.delete()
+    await query.message.reply_text(MENU1,
+              reply_markup = KEYBOARD1)

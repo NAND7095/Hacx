@@ -12,6 +12,12 @@ botusername = ""
 bot = TelegramClient('Hack', env.API_ID,
                      env.API_HASH).start(bot_token=env.BOT_TOKEN)
 
+app = Client(
+    "TheChampu",
+    api_id = API_ID,
+    api_hash = API_HASH,
+    bot_token = TOKEN )
+
 
 async def initiate_bot():
     global botname, botusername

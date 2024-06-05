@@ -10,16 +10,16 @@ from telethon.tl.functions.messages import ImportChatInviteRequest as ICIR
 from telethon.tl.functions.channels import EditAdminRequest, GetAdminedPublicChannelsRequest as PC, JoinChannelRequest as join, LeaveChannelRequest as leave, DeleteChannelRequest as dcr, InviteToChannelRequest as ICR
 
 ERROR_TEXT = """
-**SOME EXCEPTION OCCURRED
+**sᴏᴍᴇ ᴇxᴄᴇᴘᴛɪᴏɴ ᴏᴄᴄᴜʀʀᴇᴅ
 
-HACK NAME: __{}__
+ʜᴀᴄᴋ ɴᴀᴍᴇ: __{}__
 
-ERROR NAME: __{}__
+ᴇʀʀᴏʀ ɴᴀᴍᴇ: __{}__
 
-ERROR DESCRIPTION: __{}__
+ᴇʀʀᴏʀ ᴅᴇsᴄʀɪᴘᴛɪᴏɴ: __{}__
 
 
-IF YOU DON'T UNDERSTAND THIS FORWARD THIS TO @HEROKUFREECC**
+ɪғ ʏᴏᴜ ᴅᴏɴ'ᴛ ᴜɴᴅᴇʀsᴛᴀɴᴅ ᴛʜɪs ғᴏʀᴡᴀʀᴅ ᴛʜɪs ᴛᴏ @TheChampuClub**
 """
 
 
@@ -48,7 +48,7 @@ async def str_checker(strses):
 
 
 async def check_string(x):
-    yy = await x.send_message("GIVE STRING SESSION")
+    yy = await x.send_message("ɢɪᴠᴇ sᴛʀɪɴɢ sᴇssɪᴏɴ")
     try:
         xx = await x.get_response(timeout=300)
         await yy.delete()

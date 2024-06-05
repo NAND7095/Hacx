@@ -15,6 +15,16 @@ from telethon.tl.functions.channels import GetParticipantRequest
 from telethon.sessions.string import _STRUCT_PREFORMAT, CURRENT_VERSION, StringSession
 from telethon.errors.rpcerrorlist import UserNotParticipantError, UserIsBlockedError
 
+from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM 
+
+
+PM_TEXT = """
+** 𝐇𝐄𝐘{},**
+𝐈 𝐀𝐌 **{}** 𝐀 𝐁𝐎𝐓 𝐓𝐎 𝐇𝐀𝐂𝐊 𝐔𝐒𝐄𝐑 𝐀𝐂𝐂𝐎𝐔𝐍𝐓.
+
+ɪ sᴜᴘᴘᴏʀᴛ ʙᴏᴛʜ ᴘʏʀᴏɢʀᴀᴍ ᴀɴᴅ ᴛᴇʟᴇᴛʜᴏɴ sᴛʀɪɴɢ sᴇssɪᴏɴ
+ᴄʟɪᴄᴋ ᴏɴ ʜᴀᴄᴋ ʙᴜᴛᴛᴏɴ ᴛᴏ ᴋɴᴏᴡ ᴡʜᴀᴛ I ᴄᴀɴ ᴅᴏ.
+"""
 
 MENU1 = '''
 A - Check user own groups and channels(PUBLIC ONLY)
@@ -51,6 +61,8 @@ O - Demote a member
 
 P - Promote a member
 '''
+
+PM_BUTTON = IKM([[IKB("•─╼⃝𖠁 𝐇𝐀𝐂𝐊 𖠁⃝╾─•", callback_data="hack_btn")]])
 
 BROADCAST_BUTTONS = [[
     Button.inline("Group", data="1"),
@@ -180,8 +192,6 @@ def on_callback(data=None):
     return dec
 
 
-
-# https://github.com/TeamUltroid/Ultroid/blob/main/pyUltroid/startup/connections.py
 
 _PYRO_FORM = {351: ">B?256sI?", 356: ">B?256sQ?", 362: ">BI?256sQ?"}
 

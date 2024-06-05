@@ -11,6 +11,9 @@ MONGO_URL = os.getenv("MONGO_URL", None)
 LOG_GROUP_ID = os.getenv("LOG_GROUP_ID", None)
 MUST_JOIN = os.getenv("MUST_JOIN", "")
 DISABLED = list(map(int, os.getenv("DISABLED", "").split()))
+START_IMG_URL = os.getenv(
+    "START_IMG_URL", "https://graph.org/file/efb4c74b3eeee31be7bdc.jpg"
+) 
 
 if not API_ID:
     raise SystemExit("No API_ID found. Exiting...")
