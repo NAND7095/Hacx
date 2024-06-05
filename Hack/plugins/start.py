@@ -11,7 +11,11 @@ async def _start(_, message):
     user_id = message.from_user.id
     user = message.from_user.mention
     bot = (await _.get_me()).mention
-    await db(user_id)
+    if DB:
+        await DB.add_user(id)
+    if env.LOG_GROUP_ID:
+        await bot.send_message(env.LOG_GROUP_ID,
+                               f'{mention} Has Just Started The Bot')
     await message.reply_photo(
        photo = env.START_IMG_URL,
        caption = PM_TEXT.format(user, bot),
@@ -29,3 +33,4 @@ async def heck_callback(bot : app, query : CallbackQuery):
     await query.message.delete()
     await query.message.reply_text(MENU1,
               reply_markup = KEYBOARD1)
+
