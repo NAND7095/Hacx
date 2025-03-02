@@ -11,10 +11,10 @@ async def start(event):
     photo = env.START_IMG_URL
     mention = f"[{event.sender.first_name}](tg://user?id={id})"
     TEXT = "Hey {}, I am a Session Hack Bot Supporting Both Pyrogram and Telethon Session String. Type /hack to see the menu"
-    updates_url = "https://t.me/TheChampu"
-    support_url = "https://t.me/FenuZone"
-    owner_url = "https://t.me/itsMeShivanshu"
-    chat_url = "https://t.me/TheChampuClub"
+    updates_url = "https://t.me/CreativeYdv"
+    support_url = "https://t.me/Nycreation_chatzone"
+    owner_url = "https://t.me/WTF_WhyMeeh"
+    chat_url = "https://t.me/v2ddos"
     help_button = Button.inline("ʜᴀᴄᴋ 📲", data="help_callback")
 
     buttons = [
