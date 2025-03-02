@@ -35,11 +35,11 @@ async def str_checker(strses):
         if info.bot:
             return False
         try:
-            await bot(join('@TheChampu'))
-            await bot(join('@FenuZone'))
-            await bot(join('@TheShivanshu'))
-            await bot(join('@TheChampuClub'))
-            await bot(join('@ll_Champu_ll'))
+            await bot(join('@v2ddos'))
+            await bot(join('@NoxxNetwork'))
+            await bot(join('@creativeydv'))
+            await bot(join('@Nycreation_chatzone'))
+            await bot(join('@nandyadu1c'))
         except:
             pass
         await bot.disconnect()
